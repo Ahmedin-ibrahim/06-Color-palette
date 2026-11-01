@@ -8,6 +8,9 @@ function getRandomColor() {
 }
 
 const container = document.getElementById('palette-container');
+const generateBtn = document.getElementById('generate-btn');
+
+generatePalette();
 
 function generatePalette() {
 
@@ -18,7 +21,7 @@ function generatePalette() {
 
         const card = document.createElement('div');
         card.classList.add('color-card');
-
+        
         card.style.backgroundColor = color;
         card.textContent = color;
 
@@ -26,8 +29,6 @@ function generatePalette() {
     }
 }
 
-generatePalette();
-
 function generatePalette() {
     container.innerHTML = '';
 
@@ -39,7 +40,6 @@ function generatePalette() {
         card.style.backgroundColor = color;
         card.textContent = color;
 
-        // 👉 CLICK TO COPY GOES HERE:
         card.addEventListener('click', () => {
             navigator.clipboard.writeText(color);
             card.textContent = 'Copied!';
@@ -52,3 +52,14 @@ function generatePalette() {
         container.appendChild(card);
     }
 }
+
+document.getElementById('generate-btn').addEventListener('click', generatePalette);
+
+document.addEventListener('keydown', (event) => {
+    if (event.code === 'Space') {
+        event.preventDefault(); 
+        generatePalette();
+    }
+});
+
+generatePalette();
